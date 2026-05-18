@@ -1,0 +1,23 @@
+[Unit]
+Description=Elderly Phone TTS API Service
+After=network.target
+
+[Service]
+Type=simple
+User=brookli
+WorkingDirectory=/home/brookli/faster-qwen3-tts/api-service
+Environment="PATH=/home/brookli/anaconda3/envs/qwen3-tts/bin"
+Environment="HF_HOME=/home/brookli/.cache/huggingface"
+Environment="TRANSFORMERS_CACHE=/home/brookli/.cache/huggingface/hub"
+Environment="HF_ENDPOINT=https://hf-mirror.com"
+ExecStart=/home/brookli/anaconda3/envs/qwen3-tts/bin/python faster_qwen3_tts_server.py --port 8006
+Restart=on-failure
+RestartSec=10
+
+# Logging (compatible with journalctl)
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=tts-api-service
+
+[Install]
+WantedBy=multi-user.target
