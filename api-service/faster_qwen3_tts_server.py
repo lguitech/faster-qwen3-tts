@@ -18,6 +18,7 @@ from typing import Optional
 import numpy as np
 import soundfile as sf
 import torch
+import torchaudio.functional as F
 import uvicorn
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import Response, StreamingResponse
@@ -36,12 +37,28 @@ logger = logging.getLogger(__name__)
 MODEL_ID = "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice"
 MAX_TEXT_LENGTH = 500
 SUPPORTED_LANGUAGES = {"Chinese", "English"}
+TARGET_SAMPLE_RATE = 16000  # Target output sample rate (downsample from 24kHz)
 
 # Global state
 app = FastAPI(title="Elderly Phone TTS Service")
 tts_model: Optional[FasterQwen3TTS] = None
 available_speakers: list = []
 generation_lock = threading.Lock()
+
+
+def resample_audio(audio_24k: np.ndarray, src_sr: int = 24000, tgt_sr: int = TARGET_SAMPLE_RATE) -> np.ndarray:
+    """Resample audio from source to target sample rate using torchaudio."""
+    if src_sr == tgt_sr:
+        return audio_24k
+    
+    # Convert to tensor and add batch dimension
+    audio_tensor = torch.from_numpy(audio_24k).unsqueeze(0)  # Shape: [1, samples]
+    
+    # Resample using torchaudio (linear interpolation, fast and simple)
+    audio_resampled = F.resample(audio_tensor, src_sr, tgt_sr)
+    
+    # Remove batch dimension and convert back to numpy
+    return audio_resampled.squeeze(0).numpy()
 
 
 def create_wav_header(sample_rate: int, channels: int = 1, bits_per_sample: int = 16) -> bytes:
@@ -191,7 +208,14 @@ async def text_to_speech(
         if not audio_list or len(audio_list[0]) == 0:
             raise RuntimeError("Generated audio is empty")
         
-        wav_bytes = convert_to_wav_bytes(audio_list[0], sample_rate)
+        # Downsample from 24kHz to 16kHz if needed
+        audio_data = audio_list[0]
+        if sample_rate != TARGET_SAMPLE_RATE:
+            logger.debug(f"Resampling audio from {sample_rate} Hz to {TARGET_SAMPLE_RATE} Hz")
+            audio_data = resample_audio(audio_data, sample_rate, TARGET_SAMPLE_RATE)
+            sample_rate = TARGET_SAMPLE_RATE
+        
+        wav_bytes = convert_to_wav_bytes(audio_data, sample_rate)
         
         logger.info(f"Speech generated successfully: {len(wav_bytes)} bytes, {sample_rate} Hz")
         
@@ -270,7 +294,13 @@ async def text_to_speech_streaming(
             except StopIteration:
                 raise HTTPException(status_code=400, detail="Generation produced no output")
             
-            # Generate WAV file header
+            # Downsample first chunk if needed
+            if sample_rate != TARGET_SAMPLE_RATE:
+                logger.debug(f"Resampling first chunk from {sample_rate} Hz to {TARGET_SAMPLE_RATE} Hz")
+                first_chunk = resample_audio(first_chunk, sample_rate, TARGET_SAMPLE_RATE)
+                sample_rate = TARGET_SAMPLE_RATE
+            
+            # Generate WAV file header with target sample rate
             wav_header = create_wav_header(sample_rate)
             
             logger.info(f"Streaming started: sample_rate={sample_rate} Hz, first_chunk_size={len(first_chunk)} samples")
@@ -280,13 +310,18 @@ async def text_to_speech_streaming(
                 # Send WAV header first
                 yield wav_header
                 
-                # Send first audio chunk
+                # Send first audio chunk (already resampled)
                 yield convert_to_pcm_bytes(first_chunk)
                 
                 # Send subsequent chunks
                 chunk_count = 1
-                for chunk, _, timing in stream_gen:
+                for chunk, orig_sr, timing in stream_gen:
                     chunk_count += 1
+                    
+                    # Downsample chunk if needed
+                    if orig_sr != TARGET_SAMPLE_RATE:
+                        chunk = resample_audio(chunk, orig_sr, TARGET_SAMPLE_RATE)
+                    
                     logger.debug(f"Streaming chunk {chunk_count}: {len(chunk)} samples")
                     yield convert_to_pcm_bytes(chunk)
                 
