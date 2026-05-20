@@ -1,0 +1,192 @@
+Traceback (most recent call last):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 905, in _error_catcher
+    yield
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1430, in read_chunked
+    self._update_chunk_length()
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1351, in _update_chunk_length
+    raise InvalidChunkLength(self, line) from None
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'\r\n', 44 bytes read)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/requests/models.py", line 822, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1260, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1407, in read_chunked
+    with self._error_catcher():
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 928, in _error_catcher
+    raise ProtocolError(f"Connection broken: {e!r}", e) from e
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/brookli/faster-qwen3-tts/api-service/test_streaming.py", line 53, in test_streaming_tts
+    for chunk in response.iter_content(chunk_size=4096):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/requests/models.py", line 824, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+Traceback (most recent call last):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 905, in _error_catcher
+    yield
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1430, in read_chunked
+    self._update_chunk_length()
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1351, in _update_chunk_length
+    raise InvalidChunkLength(self, line) from None
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'\r\n', 44 bytes read)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/requests/models.py", line 822, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1260, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1407, in read_chunked
+    with self._error_catcher():
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 928, in _error_catcher
+    raise ProtocolError(f"Connection broken: {e!r}", e) from e
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/brookli/faster-qwen3-tts/api-service/test_streaming.py", line 53, in test_streaming_tts
+    for chunk in response.iter_content(chunk_size=4096):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/requests/models.py", line 824, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+Traceback (most recent call last):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 905, in _error_catcher
+    yield
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1430, in read_chunked
+    self._update_chunk_length()
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1351, in _update_chunk_length
+    raise InvalidChunkLength(self, line) from None
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'\r\n', 44 bytes read)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/requests/models.py", line 822, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1260, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1407, in read_chunked
+    with self._error_catcher():
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 928, in _error_catcher
+    raise ProtocolError(f"Connection broken: {e!r}", e) from e
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/brookli/faster-qwen3-tts/api-service/test_streaming.py", line 53, in test_streaming_tts
+    for chunk in response.iter_content(chunk_size=4096):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/requests/models.py", line 824, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+Traceback (most recent call last):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 905, in _error_catcher
+    yield
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1430, in read_chunked
+    self._update_chunk_length()
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1351, in _update_chunk_length
+    raise InvalidChunkLength(self, line) from None
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'\r\n', 44 bytes read)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/requests/models.py", line 822, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1260, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 1407, in read_chunked
+    with self._error_catcher():
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/urllib3/response.py", line 928, in _error_catcher
+    raise ProtocolError(f"Connection broken: {e!r}", e) from e
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/brookli/faster-qwen3-tts/api-service/test_streaming.py", line 53, in test_streaming_tts
+    for chunk in response.iter_content(chunk_size=4096):
+  File "/home/brookli/anaconda3/envs/qwen3-tts/lib/python3.10/site-packages/requests/models.py", line 824, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+
+
+🚀 Starting TTS Performance Tests
+
+
+======================================================================
+Testing Streaming TTS
+Text: 你好世界
+Speaker: eric, Language: Chinese, Chunk Size: 12
+======================================================================
+
+✅ Received WAV header (44 bytes)
+❌ Error: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+
+======================================================================
+Testing Streaming TTS
+Text: 您好，欢迎使用老人机语音服务。今天天气很好。不是一般的好，那是相当好
+Speaker: eric, Language: Chinese, Chunk Size: 12
+======================================================================
+
+✅ Received WAV header (44 bytes)
+❌ Error: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+
+======================================================================
+Testing Streaming TTS
+Text: 您好，欢迎使用老人机语音服务。这是一个较长的测试文本，用来测试系统在生成较长语音时的性能表现。我们会...
+Speaker: eric, Language: Chinese, Chunk Size: 12
+======================================================================
+
+✅ Received WAV header (44 bytes)
+❌ Error: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+
+======================================================================
+Testing Streaming TTS
+Text: 您好，欢迎使用老人机语音服务
+Speaker: eric, Language: Chinese, Chunk Size: 6
+======================================================================
+
+✅ Received WAV header (44 bytes)
+❌ Error: ("Connection broken: InvalidChunkLength(got length b'\\r\\n', 44 bytes read)", InvalidChunkLength(got length b'\r\n', 44 bytes read))
+
+======================================================================
+Testing Non-Streaming TTS (for comparison)
+Text: 您好，欢迎使用老人机语音服务。今天天气很好。不是一般的好，那是相当好
+Speaker: eric, Language: Chinese
+======================================================================
+
+✅ Generation completed in 2.958s
+Audio size: 303.8 KB
+Estimated audio duration: 6.48s
+RTF: 2.19x
+======================================================================
+
+💾 Audio saved to: /tmp/nonstream_medium.wav
+
+✅ All tests completed!
+
+Summary:
+- Streaming endpoints provide lower TTFA (Time to First Audio)
+- Total generation time remains similar to non-streaming
+- Smaller chunk_size reduces latency but increases overhead
+- Audio files saved to /tmp/ for manual verification
+
+

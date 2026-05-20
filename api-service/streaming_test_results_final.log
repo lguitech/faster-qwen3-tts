@@ -1,0 +1,115 @@
+
+🚀 Starting TTS Performance Tests
+
+
+======================================================================
+Testing Streaming TTS
+Text: 你好世界
+Speaker: eric, Language: Chinese, Chunk Size: 12
+======================================================================
+
+✅ Received WAV header (44 bytes)
+⏱️  Time to First Audio (TTFA): 0.620s
+
+
+======================================================================
+✅ Streaming completed!
+Total time: 0.620s
+TTFA: 0.620s
+Audio duration: 1.36s
+RTF: 2.19x
+Data received: 63.8 KB
+Chunks received: 16
+======================================================================
+
+💾 Audio saved to: /tmp/stream_short.wav
+
+======================================================================
+Testing Streaming TTS
+Text: 您好，欢迎使用老人机语音服务。今天天气很好。不是一般的好，那是相当好
+Speaker: eric, Language: Chinese, Chunk Size: 12
+======================================================================
+
+✅ Received WAV header (44 bytes)
+⏱️  Time to First Audio (TTFA): 0.770s
+
+
+======================================================================
+✅ Streaming completed!
+Total time: 2.997s
+TTFA: 0.770s
+Audio duration: 7.52s
+RTF: 2.51x
+Data received: 352.5 KB
+Chunks received: 89
+======================================================================
+
+💾 Audio saved to: /tmp/stream_medium.wav
+
+======================================================================
+Testing Streaming TTS
+Text: 您好，欢迎使用老人机语音服务。这是一个较长的测试文本，用来测试系统在生成较长语音时的性能表现。我们会...
+Speaker: eric, Language: Chinese, Chunk Size: 12
+======================================================================
+
+✅ Received WAV header (44 bytes)
+⏱️  Time to First Audio (TTFA): 0.770s
+
+
+======================================================================
+✅ Streaming completed!
+Total time: 7.649s
+TTFA: 0.770s
+Audio duration: 19.28s
+RTF: 2.52x
+Data received: 903.8 KB
+Chunks received: 226
+======================================================================
+
+💾 Audio saved to: /tmp/stream_long.wav
+
+======================================================================
+Testing Streaming TTS
+Text: 您好，欢迎使用老人机语音服务
+Speaker: eric, Language: Chinese, Chunk Size: 6
+======================================================================
+
+✅ Received WAV header (44 bytes)
+⏱️  Time to First Audio (TTFA): 0.623s
+
+
+======================================================================
+✅ Streaming completed!
+Total time: 1.641s
+TTFA: 0.623s
+Audio duration: 3.84s
+RTF: 2.34x
+Data received: 180.0 KB
+Chunks received: 45
+======================================================================
+
+💾 Audio saved to: /tmp/stream_chunk6.wav
+
+======================================================================
+Testing Non-Streaming TTS (for comparison)
+Text: 您好，欢迎使用老人机语音服务。今天天气很好。不是一般的好，那是相当好
+Speaker: eric, Language: Chinese
+======================================================================
+
+✅ Generation completed in 2.789s
+Audio size: 356.3 KB
+Estimated audio duration: 7.60s
+RTF: 2.73x
+======================================================================
+
+💾 Audio saved to: /tmp/nonstream_medium.wav
+
+✅ All tests completed!
+
+Summary:
+- Streaming endpoints provide lower TTFA (Time to First Audio)
+- Total generation time remains similar to non-streaming
+- Smaller chunk_size reduces latency but increases overhead
+- Audio files saved to /tmp/ for manual verification
+
+
